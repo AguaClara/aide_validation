@@ -36,9 +36,10 @@ def validate(url):
         temp = 21 * u.degC
 
         measurements, templates = par.get_parsed_measurements(link=url)
+        print(measurements)
         hl = float(measurements['HL.Lfom'].split(' ')[0]) / 100 * u.m
         d_orifices = float(measurements['D.LfomOrifices'].split(' ')[0]) / 100 * u.m
-        b_rows = float(measurements['B.LfomRows'].split(' ')[0])/ 100 * u.m
+        b_rows = float(measurements['B.LfomRows'].split(' ')[0]) / 100 * u.m
         n_orifices = measurements['N.LfomOrifices']
         h_orifices = [float(n.split(' ')[0]) / 100 * u.m for n in measurements['H.LfomOrifices']]
 
