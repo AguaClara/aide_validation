@@ -323,7 +323,7 @@ def merge_treatment_processes(new_processes, old_processes):
     old_file.write("".join(old_lines))
     old_file.close()
 
-def parse_variables_from_map(unparsed, default_key):
+def parse_variables_from_map(unparsed, default_key = None):
     """Helper function for parse_attributes which loops through an unparsed map
     that matched one of the desired fields
     Args:
@@ -353,7 +353,7 @@ def parse_variables_from_map(unparsed, default_key):
     elif default_key == "process":
         if unparsed != "" and unparsed is not None:
             file = "Introduction/Treatment_Process.rst"
-            file_path = "../../../../doc_files/Introduction/Treatment_Process_" + unparsed + ".rst"
+            file_path = "../doc_files/Introduction/Treatment_Process_" + unparsed + ".rst"
             if os.path.exists(file):
                 merge_treatment_processes(file_path, file)
             else:
@@ -411,7 +411,7 @@ def parse_attributes(attributes, fields, type_tag="Documenter"):
                                 key = unparsed[msg_str][key_str][msg_str][val_str]
                                 for field in fields:
                                     if key == field:
-                                        new_measure, new_templates = parse_variables_from_map(unparsed[msg_str][val_str][msg_str][val_str], key)
+                                        new_measure, new_templates = parse_variables_from_map(unparsed[msg_str][val_str][msg_str][val_str], None)
                                         measurements.update(new_measure)
                                         templates.extend(new_templates)
 
