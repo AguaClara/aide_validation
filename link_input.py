@@ -8,9 +8,9 @@ e.pack()
 
 
 def urlClick():
-    url = 'url: ' + e.get()
-    validation.validate(url)
-    urlLabel = Label(root, text=url)
+    url = e.get()
+    message = validation.validate(url)
+    urlLabel = Label(root, text=message)
     urlLabel.pack()
 
 def exitClick():
