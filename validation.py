@@ -1,6 +1,10 @@
 import aguaclara.core.constants as con
 import aguaclara.core.physchem as pc
+<<<<<<< HEAD
 import parse as par
+=======
+import aguaclara.core.onshape_parser as par
+>>>>>>> 04d5d50... Starting floc branch
 import numpy as np
 import os
 from aguaclara.design.lfom import LFOM
@@ -62,4 +66,8 @@ def validate(url):
     return message
 
 msg = validate('https://cad.onshape.com/documents/c3a8ce032e33ebe875b9aab4/v/2990aab7c08553622d0c1402/e/e09d11406e7a9143537efe3a')
+<<<<<<< HEAD
 print(msg)
+=======
+print(msg)
+>>>>>>> 04d5d50... Starting floc branch
