@@ -1,21 +1,6 @@
-<<<<<<< HEAD
-google-api-python-client
-google-auth-httplib2
-google-auth-oauthlib
 aguaclara
 numpy
 sklearn
 matplotlib
 onshape_client
 pint
-=======
-google-api-python-client
-google-auth-httplib2
-google-auth-oauthlib
-aguaclara
-numpy
-sklearn
-matplotlib
-onshape_client
-pint
->>>>>>> 04d5d50... Starting floc branch

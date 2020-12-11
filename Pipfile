@@ -6,6 +6,12 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+aguaclara = ">=0.2.8"
+numpy = "*"
+sklearn = "*"
+matplotlib = "*"
+onshape_client = "*"
+pint = "*"
 
 [requires]
 python_version = "3.7"
