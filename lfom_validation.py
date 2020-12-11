@@ -1,11 +1,11 @@
-import aguaclara.core.constants as con
-import aguaclara.core.physchem as pc
-import aguaclara.core.onshape_parser as par
-import numpy as np
 import os
-from aguaclara.design.lfom import LFOM
+import numpy as np
 from datetime import datetime
 from aguaclara.core.units import u
+import aguaclara.core.physchem as pc
+import aguaclara.core.constants as con
+import aguaclara.core.onshape_parser as par
+from aguaclara.design.lfom import LFOM
 
 
 def flow_lfom_vert(height, d_ori, h_ori, n_oris):
@@ -30,7 +30,7 @@ def check_flow_lfom_vert(diameter, ori_heights, ori_numbers, cutoff, q_input, re
     return message
 
 
-def validate(url):
+def validate_lfom(url):
     try:
         q = 15 * u.L / u.s
         temp = 21 * u.degC
