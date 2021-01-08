@@ -32,11 +32,13 @@ def check_baffle_spacing(channel_l, baffle_s, report_writer):
                                     '(between 3 and 6).\n'.format(channel_l, baffle_s))
         report_writer.set_result('Invalid: Check Validation Report')
 
-def check_G_theta(channel_l, design_water_height, channel_n, channel_w, hl, temp,
+def check_G_theta(q, channel_l, design_water_height, channel_n, channel_w, hl, temp,
                   report_writer, min_G_theta=30000):
     """Evaluates whether G theta > 30000 (no maximum) and writes the result to a report.
 
     Args:
+        q: design flow rate (u.L / u.s) 
+
         channel_l: length of one channel (u.m)
 
         design_water_height: intended height of water in the flocculator (u.m)

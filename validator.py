@@ -32,12 +32,12 @@ class Validator(object):
         Returns:
             result: text which represents validation result (string)
         """
-        measurements, _ = par.get_parsed_measurements(link=url, for_docs=False)
-        process = measurements['process']
+        measurements, _, processes = par.get_parsed_measurements(link=url, for_docs=False)
+        result = 'Invalid: No Unit Process Selected'
 
-        if process == 'ET':
+        if 'ET' in processes:
             result = self.validate_lfom(measurements)
-        elif process == 'Flocculation':
+        elif 'Flocculation' in processes:
             result = self.validate_floc(measurements)
 
         return result
@@ -100,7 +100,8 @@ class Validator(object):
             vel = q / (baffle_s * channel_w)
             hl = pc.headloss_minor_channel(vel, k_minor)
 
-            check_G_theta(channel_l, design_water_height, channel_n, channel_w, hl, temp, self.report_writer)
+            check_G_theta(q, channel_l, design_water_height, channel_n,
+                          channel_w, hl, temp, self.report_writer)
             check_baffle_spacing(channel_l, baffle_s, self.report_writer)
         except Exception as e:
             self.report_writer.set_result('Error: {}'.format(e))
