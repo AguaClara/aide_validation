@@ -33,11 +33,12 @@ class Validator(object):
             result: text which represents validation result (string)
         """
         measurements, _, processes = par.get_parsed_measurements(link=url, for_docs=False)
-        result = 'Invalid: No Unit Process Selected'
+        result = 'Invalid: No Unit Process Selected by Onshape Documenter'
 
         if 'ET' in processes:
             result = self.validate_lfom(measurements)
-        elif 'Flocculation' in processes:
+
+        if 'Flocculation' in processes:
             result = self.validate_floc(measurements)
 
         return result
@@ -93,6 +94,8 @@ class Validator(object):
             channel_l = measurements['L.FlocChannel']
             channel_h = measurements['H.FlocChannel']
             design_water_height = channel_h - measurements['FB']
+
+            print(measurements)
 
             # estimate head loss with minor loss equation and coefficient for the baffles
             spaces_n = (baffle_n_per_chan + 1) * channel_n

@@ -4,6 +4,8 @@ from datetime import datetime
 class ReportWriter(object):
     """Class to write validation results to a report file"""
     def __init__(self):
+        if not os.path.exists('Reports'):
+            os.mkdir('Reports')
         now = datetime.now()
         str_now = now.strftime('%m.%d.%Y.%H.%M.%S')
         self.report_name = 'Reports/Validation_Report_' + str_now + '.txt'
