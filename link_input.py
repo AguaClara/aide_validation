@@ -1,5 +1,5 @@
 from tkinter import *
-import validation
+import validator
 
 root = Tk()
 
@@ -9,7 +9,8 @@ e.pack()
 
 def urlClick():
     url = e.get()
-    message = validation.validate(url)
+    validator = Validator()
+    message = validator.validate(url)
     urlLabel = Label(root, text=message)
     urlLabel.pack()
 
