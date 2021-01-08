@@ -1,6 +1,7 @@
 # Validation reports
-Reports/*
+Reports
 
 # Default ignored files
 .idea
 .DS_Store
+.pytest_cache

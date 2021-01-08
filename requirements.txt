@@ -1,7 +1,8 @@
-aguaclara
+aguaclara>=
 numpy
 sklearn
 matplotlib
 onshape_client
 pint
 pytest
+tkinter

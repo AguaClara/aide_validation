@@ -4,9 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pytest = "*"
 
 [packages]
-aguaclara = ">=0.2.8"
+aguaclara = ">=0.2.9"
 numpy = "*"
 sklearn = "*"
 matplotlib = "*"
