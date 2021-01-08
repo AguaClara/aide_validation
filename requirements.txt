@@ -4,3 +4,4 @@ sklearn
 matplotlib
 onshape_client
 pint
+pytest
