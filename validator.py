@@ -95,8 +95,6 @@ class Validator(object):
             channel_h = measurements['H.FlocChannel']
             design_water_height = channel_h - measurements['FB']
 
-            print(measurements)
-
             # estimate head loss with minor loss equation and coefficient for the baffles
             spaces_n = (baffle_n_per_chan + 1) * channel_n
             k_minor = Flocculator().BAFFLE_K * spaces_n

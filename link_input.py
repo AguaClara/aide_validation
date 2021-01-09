@@ -1,27 +1,36 @@
 from tkinter import *
-import validator
+from validator import Validator
 
-root = Tk()
+class ValidationGUI(object):
+    def __init__(self, root):
+        self.root = root
+        self.e = Entry(root, width=50)
+        self.e.pack()
 
-e = Entry(root, width=50)
-e.pack()
+        urlButton = Button(root, text='Validate OnShape Url',
+                           command=self.urlClick)
+        urlButton.pack()
 
+        exitButton = Button(root, text='Exit AIDE Validation',
+                            command=self.exitClick)
+        exitButton.pack()
 
-def urlClick():
-    url = e.get()
-    validator = Validator()
-    message = validator.validate(url)
-    urlLabel = Label(root, text=message)
-    urlLabel.pack()
+        self.validator = Validator()
+        self.urlLabel = None
 
-def exitClick():
-    root.destroy()
+    def urlClick(self):
+        url = self.e.get()
+        message = self.validator.validate(url)
+        if self.urlLabel is None:
+            self.urlLabel = Label(root, text=message)
+            self.urlLabel.pack()
+        else:
+            self.urlLabel['text'] = message
 
+    def exitClick(self):
+        self.root.destroy()
 
-urlButton = Button(root, text='Validate OnShape Url', command=urlClick)
-urlButton.pack()
-
-exitButton = Button(root, text='Exit AIDE Validation', command=exitClick)
-exitButton.pack()
-
-root.mainloop()
+if __name__=='__main__':
+    root = Tk()
+    gui = ValidationGUI(root)
+    root.mainloop()
