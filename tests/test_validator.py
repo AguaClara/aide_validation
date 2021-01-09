@@ -1,7 +1,7 @@
 import time
 import pytest
 from aguaclara.core.units import u
-from validator import Validator
+from aide_validation.validator import Validator
 
 # set skip_all_tests = True to focus on single test
 skip_all_tests = False

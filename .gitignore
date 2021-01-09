@@ -5,3 +5,8 @@ Reports
 .idea
 .DS_Store
 .pytest_cache
+
+# Only one of Pipfile and requirements.txt can exist for Heroku to work
+# to create Pipfile locally, run: pipenv install -r requirements.txt
+Pipfile
+Pipfile.lock
