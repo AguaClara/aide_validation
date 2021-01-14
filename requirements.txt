@@ -1,7 +1,0 @@
-aguaclara>=0.2.9
-numpy
-sklearn
-matplotlib
-onshape_client
-pint
-pytest

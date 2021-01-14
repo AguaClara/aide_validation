@@ -7,7 +7,7 @@ labels: "Testing, Needs Triage"
 
 ---
 
-- [ ] I have reviewed the test coverage on [Codecov](https://codecov.io/gh/aics-int/microscope_automation)
+- [ ] I have reviewed the test coverage on [Codecov](https://codecov.io/gh/AguaClara/aide_validation)
 
 ---
 

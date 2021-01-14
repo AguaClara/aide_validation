@@ -38,7 +38,7 @@ jobs:
         pip install .[test]
     - name: Lint with flake8
       run: |
-        flake8 microscope_automation --count --verbose --show-source --statistics
+        flake8 aide_validation --count --verbose --show-source --statistics
     - name: Check with black
       run: |
-        black --check microscope_automation
+        black --check aide_validation

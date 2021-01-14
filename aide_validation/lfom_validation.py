@@ -1,3 +1,9 @@
+"""Helper functions for validating LFOM.
+Created on September 18, 2020
+
+@author: jcs528@cornell.edu
+"""
+
 import numpy as np
 from aguaclara.core.units import u
 import aguaclara.core.physchem as pc

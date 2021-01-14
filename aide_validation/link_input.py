@@ -1,3 +1,9 @@
+"""GUI to display validation results.
+Created on September 18, 2020
+
+@author: jcs528@cornell.edu
+"""
+
 from tkinter import *
 from validator import Validator
 

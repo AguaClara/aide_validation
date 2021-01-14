@@ -9,7 +9,7 @@ labels: 'Bug, Needs Triage'
 
 - [ ] I have checked that this issue has not already been reported.
 
-- [ ] I have confirmed this bug exists on the latest version of microscope_automation.
+- [ ] I have confirmed this bug exists on the latest version of aide_validation.
 
 ---
 

@@ -1,3 +1,9 @@
+"""Helper functions for validating LFOM.
+Created on January 6, 2021
+
+@author: fchapin@aguaclarareach.org
+"""
+
 import os
 from datetime import datetime
 

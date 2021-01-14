@@ -1,3 +1,9 @@
+"""Helper functions for validating LFOM.
+Created on January 6, 2021
+
+@author: fchapin@aguaclarareach.org
+"""
+
 import math
 from aguaclara.core.units import u
 import aguaclara.core.physchem as pc
@@ -37,7 +43,7 @@ def check_G_theta(q, channel_l, design_water_height, channel_n, channel_w, hl, t
     """Evaluates whether G theta > 30000 (no maximum) and writes the result to a report.
 
     Args:
-        q: design flow rate (u.L / u.s) 
+        q: design flow rate (u.L / u.s)
 
         channel_l: length of one channel (u.m)
 
