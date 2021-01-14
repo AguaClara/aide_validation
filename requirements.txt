@@ -1,0 +1,6 @@
+aguaclara>=0.2.9
+numpy
+matplotlib
+onshape_client
+pint
+pytest
