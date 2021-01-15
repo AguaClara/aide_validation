@@ -4,8 +4,9 @@ Created on September 18, 2020
 @author: jcs528@cornell.edu
 """
 
-from tkinter import *
+from tkinter import Tk, Button, Label, Entry
 from validator import Validator
+
 
 class ValidationGUI(object):
     def __init__(self, root):
@@ -13,12 +14,10 @@ class ValidationGUI(object):
         self.e = Entry(root, width=50)
         self.e.pack()
 
-        urlButton = Button(root, text='Validate OnShape Url',
-                           command=self.urlClick)
+        urlButton = Button(root, text="Validate OnShape Url", command=self.urlClick)
         urlButton.pack()
 
-        exitButton = Button(root, text='Exit AIDE Validation',
-                            command=self.exitClick)
+        exitButton = Button(root, text="Exit AIDE Validation", command=self.exitClick)
         exitButton.pack()
 
         self.validator = Validator()
@@ -31,12 +30,13 @@ class ValidationGUI(object):
             self.urlLabel = Label(root, text=message)
             self.urlLabel.pack()
         else:
-            self.urlLabel['text'] = message
+            self.urlLabel["text"] = message
 
     def exitClick(self):
         self.root.destroy()
 
-if __name__=='__main__':
+
+if __name__ == "__main__":
     root = Tk()
     gui = ValidationGUI(root)
     root.mainloop()
