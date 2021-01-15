@@ -52,14 +52,14 @@ extra_requirements = {
 }
 
 setup(
-    author="AguaClara",
+    author="AguaClara Cornell and AguaClara Reach",
     author_email="fchapin@aguaclarareach.org",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Education",
         "Intended Audience :: Developers",
-        "License :: Free for non-commercial use",
+        "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
