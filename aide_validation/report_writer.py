@@ -55,12 +55,12 @@ class ReportWriter(object):
         """
         self.report_file.write(msg)
 
-    def to_pdf(self, file=None, output_path=None):
+    def to_pdf(self, file_name=None, output_path=None):
         """Convert report file to PDF
 
         Args:
-            file: open file to be converted. Defaults to None
-                which uses report_file associated with this ReportWriter object
+            file_name: path to file to be converted. Defaults to None
+                which uses report_name associated with this ReportWriter object
 
             output_path: path to output file. Defaults to None which replaces .txt
                 in report_name associated with this ReportWriter object with .pdf
@@ -69,8 +69,10 @@ class ReportWriter(object):
             none
 
         """
-        if file is None:
-            file = self.report_file
+        if file_name is None:
+            file_name = self.report_name
+
+        file = open(file_name, "r")
 
         if output_path is None:
             output_path = ".".join(self.report_name.split(".")[:-1] + ["pdf"])
@@ -80,10 +82,9 @@ class ReportWriter(object):
         pdf.add_page()
         pdf.set_font("Arial", size = 15)
 
-        # insert the lines in pdf
+        # insert the lines in pdf then save
         for x in file:
             pdf.cell(50,5, txt = x, ln = 1, align = 'C')
-        # save the pdf with name .pdf
         pdf.output(output_path)
 
     def close(self):

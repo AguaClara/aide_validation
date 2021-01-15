@@ -25,8 +25,8 @@ class Validator(object):
         self.report_writer.close()
 
     def save_pdf(self):
-        """Saves the report file associated with this Validator to PDF and
-        then closes the file.
+        """Closes the report file associated with this Validator
+        then converts it to a PDF.
 
         Args:
             none
@@ -34,8 +34,8 @@ class Validator(object):
         Returns:
             none
         """
-        self.report_writer.to_pdf()
         self.close_report()
+        self.report_writer.to_pdf()
 
     def validate(self, url):
         """Validates the if the AguaClara component or plant model
