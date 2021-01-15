@@ -19,7 +19,6 @@ test_requirements = [
     "pytest-cov>=2.9.0",
     "pytest-raises>=0.11",
     "pytest-html>=2.1.1",
-    "mock>=4.0.2",
 ]
 
 dev_requirements = [
