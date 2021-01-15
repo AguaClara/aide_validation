@@ -6,6 +6,7 @@ Created on January 6, 2021
 
 import os
 from datetime import datetime
+from fpdf import FPDF
 
 
 class ReportWriter(object):
@@ -15,9 +16,9 @@ class ReportWriter(object):
         if not os.path.exists("Reports"):
             os.mkdir("Reports")
         now = datetime.now()
-        str_now = now.strftime("%m.%d.%Y.%H.%M.%S")
+        str_now = now.strftime("%Y.%m.%d.%H.%M.%S")
         self.report_name = "Reports/Validation_Report_" + str_now + ".txt"
-        self.report_file = open(self.report_name, "x")
+        self.report_file = open(self.report_name, "x+")
         self.report_file.write("AIDE Validation Report\n")
         self.result = "Valid"
 
@@ -53,6 +54,37 @@ class ReportWriter(object):
             none
         """
         self.report_file.write(msg)
+
+    def to_pdf(self, file=None, output_path=None):
+        """Convert report file to PDF
+
+        Args:
+            file: open file to be converted. Defaults to None
+                which uses report_file associated with this ReportWriter object
+
+            output_path: path to output file. Defaults to None which replaces .txt
+                in report_name associated with this ReportWriter object with .pdf
+
+        Returns:
+            none
+
+        """
+        if file is None:
+            file = self.report_file
+
+        if output_path is None:
+            output_path = ".".join(self.report_name.split(".")[:-1] + ["pdf"])
+
+        pdf = FPDF()
+        # add a page and set font
+        pdf.add_page()
+        pdf.set_font("Arial", size = 15)
+
+        # insert the lines in pdf
+        for x in file:
+            pdf.cell(50,5, txt = x, ln = 1, align = 'C')
+        # save the pdf with name .pdf
+        pdf.output(output_path)
 
     def close(self):
         """Closes the report file associated with this ReportWriter

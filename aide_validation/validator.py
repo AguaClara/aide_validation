@@ -14,7 +14,7 @@ class Validator(object):
         self.report_writer = ReportWriter()
 
     def close_report(self):
-        """Closes the report file associated with this ReportWriter
+        """Closes the report file associated with this Validator
 
         Args:
             none
@@ -23,6 +23,19 @@ class Validator(object):
             none
         """
         self.report_writer.close()
+
+    def save_pdf(self):
+        """Saves the report file associated with this Validator to PDF and
+        then closes the file.
+
+        Args:
+            none
+
+        Returns:
+            none
+        """
+        self.report_writer.to_pdf()
+        self.close_report()
 
     def validate(self, url):
         """Validates the if the AguaClara component or plant model
@@ -44,6 +57,8 @@ class Validator(object):
 
         if "Flocculation" in processes:
             result = self.validate_floc(measurements)
+
+        self.save_pdf()
 
         return result
 

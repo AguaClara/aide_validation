@@ -1,4 +1,5 @@
 aguaclara>=0.2.9
+fpdf
 numpy
 matplotlib
 onshape_client

@@ -35,6 +35,7 @@ dev_requirements = [
 
 requirements = [
     "aguaclara>=0.2.9",
+    "fpdf>=1.7.2,<1.8",
     "numpy>=1.19.1,<1.20",
     "matplotlib>=3.3.1,<3.4",
     "onshape_client>=1.6.3,<1.7",
