@@ -1,0 +1,23 @@
+# Validation reports
+Reports
+
+# Default ignored files
+.idea
+.DS_Store
+
+# Only one of Pipfile and requirements.txt can exist for Heroku to work
+# to create Pipfile locally, run: pipenv install -r requirements.txt
+Pipfile
+Pipfile.lock
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
