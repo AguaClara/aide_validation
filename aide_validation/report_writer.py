@@ -84,7 +84,7 @@ class ReportWriter(object):
 
         # insert the lines in pdf then save
         for x in file:
-            pdf.multi_cell(0, 5, txt=x, align='L')
+            pdf.multi_cell(0, 5, txt=x, align="L")
         pdf.output(output_path)
 
     def close(self):
