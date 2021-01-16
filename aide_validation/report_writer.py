@@ -80,7 +80,7 @@ class ReportWriter(object):
         pdf = FPDF()
         # add a page and set font
         pdf.add_page()
-        pdf.set_font("Arial", size = 15)
+        pdf.set_font("Arial", size=15)
 
         # insert the lines in pdf then save
         for x in file:
