@@ -5,6 +5,13 @@ from aguaclara.design.floc import Flocculator
 from .report_writer import ReportWriter
 from .floc_validation import check_baffle_spacing, check_G_theta
 from .lfom_validation import check_flow_lfom_vert
+from .sed_validation import (
+    check_inlet_manifold,
+    check_outlet_manifold,
+    check_diffuser,
+    check_sed_tank,
+    check_plate_settlers,
+)
 
 
 class Validator(object):
@@ -57,6 +64,9 @@ class Validator(object):
 
         if "Flocculation" in processes:
             result = self.validate_floc(measurements)
+
+        if "Sedimentation" in processes:
+            result = self.validate_sed(measurements)
 
         self.save_pdf()
 
@@ -132,6 +142,65 @@ class Validator(object):
                 self.report_writer,
             )
             check_baffle_spacing(channel_l, baffle_s, self.report_writer)
+        except Exception as e:
+            self.report_writer.set_result("Error: {}".format(e))
+
+        return self.report_writer.get_result()
+
+    def validate_sed(self, measurements):
+        """Validates the sedimentor model at the given URL is correct
+
+        Args:
+            measurements: dictionary of parsed variables
+
+        Returns:
+            result: text which represents validation result (string)
+        """
+        try:
+            # Onshape predicates can't handle flow and temp units
+            q = measurements["Flow"] / u.s
+            temp = measurements["TempCelsius"] * u.degC
+
+            # TODO: make sure velocity has correct units
+            vel_up = measurements["V.SedUp"]
+            vel_capture = measurements["V.SedC"]
+
+            # TODO: Create these new variables with Documenter feature
+            # Only nominal diameter is included in design specs.
+            diam_inlet_manifold = measurements["ID.SedManifold"]
+            # Diffuser head loss was also not included in design specs
+            max_hl_diffuser = measurements["HL.Diffuser"]
+
+            pi_flow_mainfold = measurements["Pi.QLaunderOrifices"]
+            w_tank = measurements["W.Sed"]
+            l_tank = measurements["L.Sed"]
+            n_plate = measurements["N.SedPlates"]
+            l_plate = measurements["L.SedPlate"]
+            w_plate = measurements["W.SedPlate"]
+            plate_thickness = measurements["T.SedPlate"]
+            angle_plate = measurements["AN.SedPlate"]
+            space_plate = measurements["S.SedPlate"]
+            w_diffuser = measurements["W.SedDiffuserInner"]
+            hl_outlet_manifold = measurements["HL.SedLaunderBod"]
+            diam_orifice = measurements["D.SedLaunderOrifice"]
+            n_orifices = measurements["N.SedLaunderOrifices"]
+
+            vel_diffuser = check_diffuser(
+                w_tank, w_diffuser, vel_up, max_hl_diffuser, temp, self.report_writer
+            )
+            check_inlet_manifold(diam_inlet_manifold, pi_flow_mainfold, vel_diffuser, q)
+            check_plate_settlers(
+                vel_capture,
+                n_plate,
+                l_plate,
+                w_plate,
+                space_plate,
+                angle_plate,
+                plate_thickness,
+                q,
+            )
+            check_sed_tank(l_tank, w_tank, vel_up, q)
+            check_outlet_manifold(n_orifices, diam_orifice, hl_outlet_manifold, q)
         except Exception as e:
             self.report_writer.set_result("Error: {}".format(e))
 
