@@ -198,9 +198,12 @@ class Validator(object):
                 angle_plate,
                 plate_thickness,
                 q,
+                self.report_writer
             )
-            check_sed_tank(l_tank, w_tank, vel_up, q)
-            check_outlet_manifold(n_orifices, diam_orifice, hl_outlet_manifold, q)
+            check_sed_tank(l_tank, w_tank, vel_up, q, self.report_writer)
+            check_outlet_manifold(
+                n_orifices, diam_orifice, hl_outlet_manifold, q, self.report_writer
+            )
         except Exception as e:
             self.report_writer.set_result("Error: {}".format(e))
 
