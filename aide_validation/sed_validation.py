@@ -38,13 +38,13 @@ def check_inlet_manifold(diam, pi_flow_manifold, vel_diffuser, q_input, report_w
         assert q_calc > q_input
 
         report_writer.write_message(
-            "The design flow rate, {!s}, is less than "
+            "The inlet manifold design flow rate, {!s}, is less than "
             "the one calculated by this validation "
             "code, {!s}.\n".format(q_input, q_calc)
         )
     except AssertionError:
         report_writer.write_message(
-            "INVALID: The design flow rate, {!s}, is "
+            "INVALID: The inlet manifold design flow rate, {!s}, is "
             "greater than the one calculated by this "
             "validation code, {!s}.\n".format(q_input, q_calc)
         )
@@ -99,13 +99,13 @@ def check_plate_settlers(
         assert q_calc > q_input
 
         report_writer.write_message(
-            "The design flow rate, {!s}, is less than "
+            "The plate settlers' design flow rate, {!s}, is less than "
             "the one calculated by this validation "
             "code, {!s}.\n".format(q_input, q_calc)
         )
     except AssertionError:
         report_writer.write_message(
-            "INVALID: The design flow rate, {!s}, is "
+            "INVALID: The plate settlers' design flow rate, {!s}, is "
             "greater than the one calculated by this "
             "validation code, {!s}.\n".format(q_input, q_calc)
         )
@@ -137,13 +137,13 @@ def check_sed_tank(length, width, vel_up, q_input, report_writer):
         assert q_calc > q_input
 
         report_writer.write_message(
-            "The design flow rate, {!s}, is less than "
+            "The sed tank's design flow rate, {!s}, is less than "
             "the one calculated by this validation "
             "code, {!s}.\n".format(q_input, q_calc)
         )
     except AssertionError:
         report_writer.write_message(
-            "INVALID: The design flow rate, {!s}, is "
+            "INVALID: The sed tank's design flow rate, {!s}, is "
             "greater than the one calculated by this "
             "validation code, {!s}.\n".format(q_input, q_calc)
         )
@@ -183,9 +183,9 @@ def check_diffuser(
         shear_floc_max: maximum shear allowed without disrupting flocculation.
         Defaults to 0.5 Pascals
 
-        pi_plane_jet: dimensionless Camp Stein constant. Defaults to 0.0124. See 
-        https://aguaclara.github.io/Textbook/Fluid_Deformation_and_Energy_Dissipation/
-        FDED_Derivations.html#equation-fluid-deformation-and-energy-dissipation-fded-derivations-9
+        pi_plane_jet: the amount of energy lost in the time that it takes for
+        the jet to travel it's width normalized by the total kinetic energy.
+        Defaults to 0.0124
 
     Returns:
         none
@@ -259,13 +259,13 @@ def check_outlet_manifold(n_orifices, diam_orifice, hl_design, q_input, report_w
         assert q_calc > q_input
 
         report_writer.write_message(
-            "The design flow rate, {!s}, is less than "
+            "The outlet manifold design flow rate, {!s}, is less than "
             "the one calculated by this validation "
             "code, {!s}.\n".format(q_input, q_calc)
         )
     except AssertionError:
         report_writer.write_message(
-            "INVALID: The design flow rate, {!s}, is "
+            "INVALID: The outlet manifold design flow rate, {!s}, is "
             "greater than the one calculated by this "
             "validation code, {!s}.\n".format(q_input, q_calc)
         )

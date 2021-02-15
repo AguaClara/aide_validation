@@ -1,15 +1,90 @@
-# First should be invalid, second valid:
-check_inlet_manifold(3 * u.inch, 0.8, 285.6 * u.mm / u.s, 0.05, 1 * u.L/u.s)
-check_inlet_manifold(ac.ID_SDR(3.0 * u.inch, 26), 0.8, 285.6 * u.mm / u.s, 0.05, 1 * u.L/u.s)
+import pytest
+from aguaclara.core.units import u
+import aguaclara.core.pipes as pipe
+from aide_validation.report_writer import ReportWriter
+import aide_validation.sed_validation as sed
 
-# invalid test case still needed
-check_plate_settlers(0.12*u.mm/u.s, 26, 60*u.cm, 42*u.inch, 2.5*u.cm, 60*u.deg, 1*u.mm, 0.05, 1*u.L/u.s)
+# set skip_all_tests = True to focus on single test
+skip_all_tests = False
+writer = ReportWriter()
 
-# invalid test case still needed
-check_sed_tank(1.1*u.m, 42*u.inch, 0.85*u.mm/u.s, 0.05, 1*u.L/u.s)
 
-# invalid test case still needed
-check_diffuser(42*u.inch, 1/8*u.inch, 0.85*u.mm/u.s, 1*u.cm, 20*u.degC)
+@pytest.fixture
+def report_writer():
+    # reset result to its default between tests
+    writer.set_result("Valid")
+    return writer
+
+
+@pytest.mark.skipif(skip_all_tests, reason="Exclude all tests")
+@pytest.mark.parametrize(
+    "diam, pi_flow_manifold, vel_diffuser, q_input, expected",
+    [
+        (3 * u.inch, 0.8, 285.6 * u.mm / u.s, 1 * u.L/u.s, "Invalid: Check Validation Report"),
+        (pipe.ID_SDR(3.0 * u.inch, 26), 0.8, 285.6 * u.mm / u.s, 1 * u.L/u.s, "Valid"),
+    ]
+)
+def test_check_inlet_manifold(diam, pi_flow_manifold, vel_diffuser, q_input, expected, report_writer):
+    sed.check_inlet_manifold(diam, pi_flow_manifold, vel_diffuser, q_input, report_writer)
+    assert report_writer.get_result() == expected
+
+
+@pytest.mark.skipif(skip_all_tests, reason="Exclude all tests")
+@pytest.mark.parametrize(
+    "vel_capture, n_plate, l_plate, w_plate, space_plate, angle_plate, "
+    "plate_thickness, q_input, expected",
+    [
+        (0.12*u.mm/u.s, 26, 60*u.cm, 42*u.inch, 2.5*u.cm, 60*u.deg, 1*u.mm, 1*u.L/u.s, "Valid"),
+    ]
+)
+def test_check_plate_settlers(
+    vel_capture,
+    n_plate,
+    l_plate,
+    w_plate,
+    space_plate,
+    angle_plate,
+    plate_thickness,
+    q_input,
+    expected,
+    report_writer
+):
+    sed.check_plate_settlers(
+        vel_capture,
+        n_plate,
+        l_plate,
+        w_plate,
+        space_plate,
+        angle_plate,
+        plate_thickness,
+        q_input,
+        report_writer
+    )
+    assert report_writer.get_result() == expected
+
+
+@pytest.mark.skipif(skip_all_tests, reason="Exclude all tests")
+@pytest.mark.parametrize(
+    "length, width, vel_up, q_input, expected",
+    [
+        (1.1*u.m, 42*u.inch, 0.85*u.mm/u.s, 1*u.L/u.s, "Invalid: Check Validation Report"),
+    ]
+)
+def test_check_sed_tank(length, width, vel_up, q_input, expected, report_writer):
+    sed.check_sed_tank(length, width, vel_up, q_input, report_writer)
+    assert report_writer.get_result() == expected
+
+
+@pytest.mark.skipif(skip_all_tests, reason="Exclude all tests")
+@pytest.mark.parametrize(
+    "w_sed, w_diffuser, vel_up, max_hl, temp, expected",
+    [
+        (42*u.inch, 1/8*u.inch, 0.85*u.mm/u.s, 1*u.cm, 20*u.degC, "Valid"),
+    ]
+)
+def test_check_diffuser(w_sed, w_diffuser, vel_up, max_hl, temp, expected, report_writer):
+    sed.check_diffuser(w_sed, w_diffuser, vel_up, max_hl, temp, report_writer)
+    assert report_writer.get_result() == expected
 
 # TODO: add test case
 # check_outlet_manifold()
