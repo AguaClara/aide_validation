@@ -20,12 +20,16 @@ skip_all_tests = False
             "Valid",
         ),
         (
-            "https://cad.onshape.com/documents/ef6563f3c625eada2abf1b35/v/bde645d8c97fa07173d23530/e/c34757f94d5576b2c0bc4954",  # noqa
-            "Valid",
+            "https://cad.onshape.com/documents/ef6563f3c625eada2abf1b35/v/633489772c83cb4dd38accb7/e/c34757f94d5576b2c0bc4954",  # noqa
+            "Invalid: Check Validation Report",
         ),
         (
             "https://cad.onshape.com/documents/ef6563f3c625eada2abf1b35/v/d36b0e82911fa0eaa5d0ebdf/e/c34757f94d5576b2c0bc4954",  # noqa
             "Invalid: No Unit Process Selected by Onshape Documenter",
+        ),
+        (
+            "https://cad.onshape.com/documents/34fa6d04617dfdf69f41533c/v/59fbd9ba0c80038806129976/e/5327d5cf80c9ff02104b58a0",  # noqa
+            "Valid",
         ),
     ],
 )
@@ -164,5 +168,51 @@ def test_validate_floc(measure, expected):
 
     validator = Validator()
     result = validator.validate_floc(measure)
+
+    assert result == expected
+
+
+@pytest.mark.skipif(skip_all_tests, reason="Exclude all tests")
+@pytest.mark.parametrize(
+    "measure, expected",
+    [
+        (
+            {
+                "Flow": 15 * u.L,
+            },
+            "Error: 'V.SedUp'",
+        ),
+        (
+            {
+                "Flow": 1 * u.L,
+                "TempCelsius": 20,
+                "V.SedUp": 0.85 * u.mm,
+                "V.SedC": 0.12 * u.mm,
+                "ID.SedManifold": 0.085 * u.m,
+                "HL.Diffuser": 0.05 * u.m,
+                "Pi.QLaunderOrifices": 0.8,
+                "W.Sed": 1.06 * u.m,
+                "L.Sed": 1.193 * u.m,
+                "N.SedPlates": 32,
+                "L.SedPlate": 0.5 * u.m,
+                "W.SedPlate": 1.06 * u.m,
+                "T.SedPlate": 0.01 * u.m,
+                "AN.SedPlate": 60 * u.deg,
+                "S.SedPlate": 0.025 * u.m,
+                "W.SedDiffuserInner": 1 / 8 * u.inch,
+                "HL.SedLaunderBod": 0.05 * u.m,
+                "D.SedLaunderOrifice": 0.015875 * u.m,
+                "N.SedLaunderOrifices": 10,
+            },
+            "Valid",
+        ),
+    ],
+)
+def test_validate_sed(measure, expected):
+    # sleep one second so reports won't have the same name
+    time.sleep(1)
+
+    validator = Validator()
+    result = validator.validate_sed(measure)
 
     assert result == expected
