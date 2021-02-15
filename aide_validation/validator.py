@@ -198,7 +198,7 @@ class Validator(object):
                 angle_plate,
                 plate_thickness,
                 q,
-                self.report_writer
+                self.report_writer,
             )
             check_sed_tank(l_tank, w_tank, vel_up, q, self.report_writer)
             check_outlet_manifold(

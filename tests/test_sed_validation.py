@@ -35,6 +35,7 @@ def test_check_inlet_manifold(diam, pi_flow_manifold, vel_diffuser, q_input, exp
     "plate_thickness, q_input, expected",
     [
         (0.12*u.mm/u.s, 26, 60*u.cm, 42*u.inch, 2.5*u.cm, 60*u.deg, 1*u.mm, 1*u.L/u.s, "Valid"),
+        (0.12*u.mm/u.s, 26, 60*u.cm, 42*u.inch, 2.5*u.cm, 60*u.deg, 1*u.mm, 1.2*u.L/u.s, "Invalid: Check Validation Report"),
     ]
 )
 def test_check_plate_settlers(
@@ -68,6 +69,7 @@ def test_check_plate_settlers(
     "length, width, vel_up, q_input, expected",
     [
         (1.1*u.m, 42*u.inch, 0.85*u.mm/u.s, 1*u.L/u.s, "Invalid: Check Validation Report"),
+        (1.1*u.m, 42*u.inch, 0.85*u.mm/u.s, 0.975*u.L/u.s, "Valid"),
     ]
 )
 def test_check_sed_tank(length, width, vel_up, q_input, expected, report_writer):
@@ -80,11 +82,23 @@ def test_check_sed_tank(length, width, vel_up, q_input, expected, report_writer)
     "w_sed, w_diffuser, vel_up, max_hl, temp, expected",
     [
         (42*u.inch, 1/8*u.inch, 0.85*u.mm/u.s, 1*u.cm, 20*u.degC, "Valid"),
+        (42*u.inch, 1/8*u.inch, 1.5*u.mm/u.s, 1*u.cm, 20*u.degC, "Invalid: Check Validation Report"),
+        (42*u.inch, 1/8*u.inch, 1.0*u.mm/u.s, 0.5*u.cm, 20*u.degC, "Invalid: Check Validation Report"),
     ]
 )
 def test_check_diffuser(w_sed, w_diffuser, vel_up, max_hl, temp, expected, report_writer):
     sed.check_diffuser(w_sed, w_diffuser, vel_up, max_hl, temp, report_writer)
     assert report_writer.get_result() == expected
 
-# TODO: add test case
-# check_outlet_manifold()
+
+@pytest.mark.skipif(skip_all_tests, reason="Exclude all tests")
+@pytest.mark.parametrize(
+    "n_orifices, diam_orifice, hl_design, q_input, expected",
+    [
+        (42, 1/8*u.inch, 1*u.cm, 1*u.L/u.s, "Invalid: Check Validation Report"),
+        (10, 0.015875*u.m, 0.05*u.m, 1*u.L/u.s, "Valid")
+    ]
+)
+def test_check_outlet_manifold(n_orifices, diam_orifice, hl_design, q_input, expected, report_writer):
+    sed.check_outlet_manifold(n_orifices, diam_orifice, hl_design, q_input, report_writer)
+    assert report_writer.get_result() == expected

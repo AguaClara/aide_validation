@@ -60,7 +60,7 @@ def check_plate_settlers(
     angle_plate,
     plate_thickness,
     q_input,
-    report_writer
+    report_writer,
 ):
     """Check that the plate settler's design flow rate is less than the one
     calculated according to the model's geometry. For more info see
@@ -255,7 +255,7 @@ def check_outlet_manifold(n_orifices, diam_orifice, hl_design, q_input, report_w
     try:
         q_calc = (
             pc.flow_orifice(diam_orifice, hl_design, con.VC_ORIFICE_RATIO) * n_orifices
-        )
+        ).to(u.L / u.s)
         assert q_calc > q_input
 
         report_writer.write_message(
