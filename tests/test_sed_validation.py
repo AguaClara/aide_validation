@@ -23,12 +23,28 @@ def report_writer():
 @pytest.mark.parametrize(
     "diam, pi_flow_manifold, vel_diffuser, q_input, expected",
     [
-        (3 * u.inch, 0.8, 285.6 * u.mm / u.s, 1 * u.L/u.s, "Invalid: Check Validation Report"),
-        (pipe.ID_SDR(3.0 * u.inch, 26), 0.8, 285.6 * u.mm / u.s, 1 * u.L/u.s, "Valid"),
-    ]
+        (
+            3 * u.inch,
+            0.8,
+            285.6 * u.mm / u.s,
+            1 * u.L / u.s,
+            "Invalid: Check Validation Report",
+        ),
+        (
+            pipe.ID_SDR(3.0 * u.inch, 26),
+            0.8,
+            285.6 * u.mm / u.s,
+            1 * u.L / u.s,
+            "Valid",
+        ),
+    ],
 )
-def test_check_inlet_manifold(diam, pi_flow_manifold, vel_diffuser, q_input, expected, report_writer):
-    sed.check_inlet_manifold(diam, pi_flow_manifold, vel_diffuser, q_input, report_writer)
+def test_check_inlet_manifold(
+    diam, pi_flow_manifold, vel_diffuser, q_input, expected, report_writer
+):
+    sed.check_inlet_manifold(
+        diam, pi_flow_manifold, vel_diffuser, q_input, report_writer
+    )
     assert report_writer.get_result() == expected
 
 
@@ -37,9 +53,29 @@ def test_check_inlet_manifold(diam, pi_flow_manifold, vel_diffuser, q_input, exp
     "vel_capture, n_plate, l_plate, w_plate, space_plate, angle_plate, "
     "plate_thickness, q_input, expected",
     [
-        (0.12*u.mm/u.s, 26, 60*u.cm, 42*u.inch, 2.5*u.cm, 60*u.deg, 1*u.mm, 1*u.L/u.s, "Valid"),
-        (0.12*u.mm/u.s, 26, 60*u.cm, 42*u.inch, 2.5*u.cm, 60*u.deg, 1*u.mm, 1.2*u.L/u.s, "Invalid: Check Validation Report"),
-    ]
+        (
+            0.12 * u.mm / u.s,
+            26,
+            60 * u.cm,
+            42 * u.inch,
+            2.5 * u.cm,
+            60 * u.deg,
+            1 * u.mm,
+            1 * u.L / u.s,
+            "Valid",
+        ),
+        (
+            0.12 * u.mm / u.s,
+            26,
+            60 * u.cm,
+            42 * u.inch,
+            2.5 * u.cm,
+            60 * u.deg,
+            1 * u.mm,
+            1.2 * u.L / u.s,
+            "Invalid: Check Validation Report",
+        ),
+    ],
 )
 def test_check_plate_settlers(
     vel_capture,
@@ -51,7 +87,7 @@ def test_check_plate_settlers(
     plate_thickness,
     q_input,
     expected,
-    report_writer
+    report_writer,
 ):
     sed.check_plate_settlers(
         vel_capture,
@@ -62,7 +98,7 @@ def test_check_plate_settlers(
         angle_plate,
         plate_thickness,
         q_input,
-        report_writer
+        report_writer,
     )
     assert report_writer.get_result() == expected
 
@@ -71,9 +107,15 @@ def test_check_plate_settlers(
 @pytest.mark.parametrize(
     "length, width, vel_up, q_input, expected",
     [
-        (1.1*u.m, 42*u.inch, 0.85*u.mm/u.s, 1*u.L/u.s, "Invalid: Check Validation Report"),
-        (1.1*u.m, 42*u.inch, 0.85*u.mm/u.s, 0.975*u.L/u.s, "Valid"),
-    ]
+        (
+            1.1 * u.m,
+            42 * u.inch,
+            0.85 * u.mm / u.s,
+            1 * u.L / u.s,
+            "Invalid: Check Validation Report",
+        ),
+        (1.1 * u.m, 42 * u.inch, 0.85 * u.mm / u.s, 0.975 * u.L / u.s, "Valid"),
+    ],
 )
 def test_check_sed_tank(length, width, vel_up, q_input, expected, report_writer):
     sed.check_sed_tank(length, width, vel_up, q_input, report_writer)
@@ -84,12 +126,35 @@ def test_check_sed_tank(length, width, vel_up, q_input, expected, report_writer)
 @pytest.mark.parametrize(
     "w_sed, w_diffuser, vel_up, max_hl, temp, expected",
     [
-        (42*u.inch, 1/8*u.inch, 0.85*u.mm/u.s, 1*u.cm, 20*u.degC, "Valid"),
-        (42*u.inch, 1/8*u.inch, 1.5*u.mm/u.s, 1*u.cm, 20*u.degC, "Invalid: Check Validation Report"),
-        (42*u.inch, 1/8*u.inch, 1.0*u.mm/u.s, 0.5*u.cm, 20*u.degC, "Invalid: Check Validation Report"),
-    ]
+        (
+            42 * u.inch,
+            1 / 8 * u.inch,
+            0.85 * u.mm / u.s,
+            1 * u.cm,
+            20 * u.degC,
+            "Valid",
+        ),
+        (
+            42 * u.inch,
+            1 / 8 * u.inch,
+            1.5 * u.mm / u.s,
+            1 * u.cm,
+            20 * u.degC,
+            "Invalid: Check Validation Report",
+        ),
+        (
+            42 * u.inch,
+            1 / 8 * u.inch,
+            1.0 * u.mm / u.s,
+            0.5 * u.cm,
+            20 * u.degC,
+            "Invalid: Check Validation Report",
+        ),
+    ],
 )
-def test_check_diffuser(w_sed, w_diffuser, vel_up, max_hl, temp, expected, report_writer):
+def test_check_diffuser(
+    w_sed, w_diffuser, vel_up, max_hl, temp, expected, report_writer
+):
     sed.check_diffuser(w_sed, w_diffuser, vel_up, max_hl, temp, report_writer)
     assert report_writer.get_result() == expected
 
@@ -98,10 +163,20 @@ def test_check_diffuser(w_sed, w_diffuser, vel_up, max_hl, temp, expected, repor
 @pytest.mark.parametrize(
     "n_orifices, diam_orifice, hl_design, q_input, expected",
     [
-        (32, 1/8*u.inch, 1*u.cm, 1*u.L/u.s, "Invalid: Check Validation Report"),
-        (9, 0.015875*u.m, 0.05*u.m, 1*u.L/u.s, "Valid")
-    ]
+        (
+            32,
+            1 / 8 * u.inch,
+            1 * u.cm,
+            1 * u.L / u.s,
+            "Invalid: Check Validation Report",
+        ),
+        (9, 0.015875 * u.m, 0.05 * u.m, 1 * u.L / u.s, "Valid"),
+    ],
 )
-def test_check_outlet_manifold(n_orifices, diam_orifice, hl_design, q_input, expected, report_writer):
-    sed.check_outlet_manifold(n_orifices, diam_orifice, hl_design, q_input, report_writer)
+def test_check_outlet_manifold(
+    n_orifices, diam_orifice, hl_design, q_input, expected, report_writer
+):
+    sed.check_outlet_manifold(
+        n_orifices, diam_orifice, hl_design, q_input, report_writer
+    )
     assert report_writer.get_result() == expected

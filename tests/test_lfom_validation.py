@@ -38,7 +38,8 @@ def report_writer():
                 0.15858522727272734,
                 0.1753238636363637,
                 0.19206250000000008,
-            ] * u.m,
+            ]
+            * u.m,
             [
                 17.0,
                 4.0,
@@ -71,7 +72,8 @@ def report_writer():
                 0.08,
                 0.087,
                 0.096,
-            ] * u.m,
+            ]
+            * u.m,
             [
                 17.0,
                 4.0,
@@ -114,7 +116,8 @@ def test_flow_lfom_vert(height, d_ori, h_ori, n_oris, expected):
                 0.15858522727272734,
                 0.1753238636363637,
                 0.19206250000000008,
-            ] * u.m,
+            ]
+            * u.m,
             [
                 17.0,
                 4.0,
@@ -148,7 +151,8 @@ def test_flow_lfom_vert(height, d_ori, h_ori, n_oris, expected):
                 0.08,
                 0.087,
                 0.096,
-            ] * u.m,
+            ]
+            * u.m,
             [
                 17.0,
                 4.0,
@@ -182,7 +186,8 @@ def test_flow_lfom_vert(height, d_ori, h_ori, n_oris, expected):
                 0.08,
                 0.087,
                 0.096,
-            ] * u.m,
+            ]
+            * u.m,
             [
                 17.0,
                 4.0,

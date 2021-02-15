@@ -105,6 +105,6 @@ def test_check_G_theta(
         hl,
         temp,
         report_writer,
-        min_G_theta=min_G_theta
+        min_G_theta=min_G_theta,
     )
     assert report_writer.get_result() == expected

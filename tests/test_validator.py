@@ -30,7 +30,7 @@ skip_all_tests = False
         (
             "https://cad.onshape.com/documents/34fa6d04617dfdf69f41533c/v/59fbd9ba0c80038806129976/e/5327d5cf80c9ff02104b58a0",  # noqa
             "Valid",
-        )
+        ),
     ],
 )
 def test_validate(url, expected):
@@ -189,17 +189,17 @@ def test_validate_floc(measure, expected):
                 "V.SedUp": 0.85 * u.mm,
                 "V.SedC": 0.12 * u.mm,
                 "ID.SedManifold": 0.085 * u.m,
-                "HL.Diffuser":  0.05 * u.m,
+                "HL.Diffuser": 0.05 * u.m,
                 "Pi.QLaunderOrifices": 0.8,
-                "W.Sed":  1.06 * u.m,
-                "L.Sed":  1.193 * u.m,
+                "W.Sed": 1.06 * u.m,
+                "L.Sed": 1.193 * u.m,
                 "N.SedPlates": 32,
                 "L.SedPlate": 0.5 * u.m,
                 "W.SedPlate": 1.06 * u.m,
                 "T.SedPlate": 0.01 * u.m,
                 "AN.SedPlate": 60 * u.deg,
                 "S.SedPlate": 0.025 * u.m,
-                "W.SedDiffuserInner": 1/8 * u.inch,
+                "W.SedDiffuserInner": 1 / 8 * u.inch,
                 "HL.SedLaunderBod": 0.05 * u.m,
                 "D.SedLaunderOrifice": 0.015875 * u.m,
                 "N.SedLaunderOrifices": 10,
