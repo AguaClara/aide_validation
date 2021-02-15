@@ -1,10 +1,13 @@
 import pytest
+import time
 from aguaclara.core.units import u
 from aide_validation.report_writer import ReportWriter
 from aide_validation.floc_validation import check_baffle_spacing, check_G_theta
 
 # set skip_all_tests = True to focus on single test
 skip_all_tests = False
+# sleep one second so reports won't have the same name
+time.sleep(1)
 writer = ReportWriter()
 
 

@@ -1,4 +1,5 @@
 import pytest
+import time
 from aguaclara.core.units import u
 import aguaclara.core.pipes as pipe
 from aide_validation.report_writer import ReportWriter
@@ -6,6 +7,8 @@ import aide_validation.sed_validation as sed
 
 # set skip_all_tests = True to focus on single test
 skip_all_tests = False
+# sleep one second so reports won't have the same name
+time.sleep(1)
 writer = ReportWriter()
 
 
@@ -95,8 +98,8 @@ def test_check_diffuser(w_sed, w_diffuser, vel_up, max_hl, temp, expected, repor
 @pytest.mark.parametrize(
     "n_orifices, diam_orifice, hl_design, q_input, expected",
     [
-        (42, 1/8*u.inch, 1*u.cm, 1*u.L/u.s, "Invalid: Check Validation Report"),
-        (10, 0.015875*u.m, 0.05*u.m, 1*u.L/u.s, "Valid")
+        (32, 1/8*u.inch, 1*u.cm, 1*u.L/u.s, "Invalid: Check Validation Report"),
+        (9, 0.015875*u.m, 0.05*u.m, 1*u.L/u.s, "Valid")
     ]
 )
 def test_check_outlet_manifold(n_orifices, diam_orifice, hl_design, q_input, expected, report_writer):

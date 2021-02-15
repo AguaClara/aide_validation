@@ -1,10 +1,13 @@
 import pytest
+import time
 from aguaclara.core.units import u
 from aide_validation.report_writer import ReportWriter
 from aide_validation.lfom_validation import flow_lfom_vert, check_flow_lfom_vert
 
 # set skip_all_tests = True to focus on single test
 skip_all_tests = False
+# sleep one second so reports won't have the same name
+time.sleep(1)
 writer = ReportWriter()
 
 

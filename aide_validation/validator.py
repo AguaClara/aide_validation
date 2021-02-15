@@ -62,10 +62,10 @@ class Validator(object):
         if "ET" in processes:
             result = self.validate_lfom(measurements)
 
-        if "Flocculation" in processes:
+        if "Floc" in processes:
             result = self.validate_floc(measurements)
 
-        if "Sedimentation" in processes:
+        if "Sed" in processes:
             result = self.validate_sed(measurements)
 
         self.save_pdf()
@@ -157,13 +157,11 @@ class Validator(object):
             result: text which represents validation result (string)
         """
         try:
-            # Onshape predicates can't handle flow and temp units
+            # Onshape predicates can't handle flow, velocity, and temp units
             q = measurements["Flow"] / u.s
+            vel_up = measurements["V.SedUp"]  / u.s
+            vel_capture = measurements["V.SedC"] / u.s
             temp = measurements["TempCelsius"] * u.degC
-
-            # TODO: make sure velocity has correct units
-            vel_up = measurements["V.SedUp"]
-            vel_capture = measurements["V.SedC"]
 
             # TODO: Create these new variables with Documenter feature
             # Only nominal diameter is included in design specs.
@@ -188,7 +186,7 @@ class Validator(object):
             vel_diffuser = check_diffuser(
                 w_tank, w_diffuser, vel_up, max_hl_diffuser, temp, self.report_writer
             )
-            check_inlet_manifold(diam_inlet_manifold, pi_flow_mainfold, vel_diffuser, q)
+            check_inlet_manifold(diam_inlet_manifold, pi_flow_mainfold, vel_diffuser, q, self.report_writer)
             check_plate_settlers(
                 vel_capture,
                 n_plate,
