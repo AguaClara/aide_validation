@@ -1,9 +1,7 @@
-google-api-python-client
-google-auth-httplib2
-google-auth-oauthlib
-aguaclara
+aguaclara>=0.2.9
+fpdf
 numpy
-sklearn
 matplotlib
 onshape_client
 pint
+pytest
