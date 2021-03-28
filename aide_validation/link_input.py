@@ -5,7 +5,7 @@ Created on September 18, 2020
 """
 
 from tkinter import Tk, Button, Label, Entry
-from aide_validation.validator import Validator
+from validator import Validator
 
 
 class ValidationGUI(object):

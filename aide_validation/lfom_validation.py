@@ -53,8 +53,16 @@ def check_flow_lfom_vert(
         q_calc = flow_lfom_vert(
             ori_heights[-1] + 0.5 * diameter, diameter, ori_heights, ori_numbers
         )
+
+        flows = []
+        for h in ori_heights:
+            flows.append(flow_lfom_vert(h, diameter, ori_heights, ori_numbers).magnitude)
+        flows = flows * u.L / u.s
+        report_writer.add_r2_plot(ori_heights, flows, "Orifice Heights", "Flow Rates")
+
         assert cutoff > (q_calc - q_input) / q_input
         assert -cutoff < (q_calc - q_input) / q_input
+
         report_writer.write_message(
             "The expected flow rate, {!s}, was very close "
             "to the one calculated by this validation "
