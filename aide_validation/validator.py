@@ -3,9 +3,9 @@ import aguaclara.core.physchem as pc
 import aguaclara.core.onshape_parser as par
 from aguaclara.design.floc import Flocculator
 from .report_writer import ReportWriter
-from floc_validation import check_baffle_spacing, check_G_theta
-from lfom_validation import check_flow_lfom_vert
-from sed_validation import (
+from aide_validation.floc_validation import check_baffle_spacing, check_G_theta
+from aide_validation.lfom_validation import check_flow_lfom_vert
+from aide_validation.sed_validation import (
     check_inlet_manifold,
     check_outlet_manifold,
     check_diffuser,
