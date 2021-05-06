@@ -2,7 +2,7 @@ from aguaclara.core.units import u
 import aguaclara.core.physchem as pc
 import aguaclara.core.onshape_parser as par
 from aguaclara.design.floc import Flocculator
-from aide_validation.report_writer import ReportWriter
+from .report_writer import ReportWriter
 from aide_validation.floc_validation import check_baffle_spacing, check_G_theta
 from aide_validation.lfom_validation import check_flow_lfom_vert
 from aide_validation.sed_validation import (
