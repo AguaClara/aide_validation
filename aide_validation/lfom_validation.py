@@ -56,7 +56,9 @@ def check_flow_lfom_vert(
 
         flows = []
         for h in ori_heights:
-            flows.append(flow_lfom_vert(h, diameter, ori_heights, ori_numbers).magnitude)
+            flows.append(
+                flow_lfom_vert(h, diameter, ori_heights, ori_numbers).magnitude
+            )
         flows = flows * u.L / u.s
         report_writer.add_r2_plot(ori_heights, flows, "Orifice Heights", "Flow Rates")
 

@@ -72,7 +72,8 @@ class ReportWriter(object):
             y_type: a string to describe the y_values
         """
         r2 = np.corrcoef(x_values.magnitude, y_values.magnitude)[0, 1]**2
-        self.r_squared = "The R^2 between the " + x_type + " and " + y_type + " is " + str(r2) + "."
+        self.r_squared = "The R^2 between the " + x_type + " and " + y_type + \
+            " is " + str(r2) + "."
         plt.plot(x_values, y_values)
         plt.xlabel(x_type)
         plt.ylabel(y_type)
